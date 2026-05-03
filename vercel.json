@@ -9,6 +9,11 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
+          {
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "framework": null
+}
         }
       ]
     }
