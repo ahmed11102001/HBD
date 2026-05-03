@@ -1,115 +1,375 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>عيد ميلاد حبيبتي 🎂</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد ميلاد سعيد حبيبتي!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none;
         }
 
         body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #4a1a6b 30%, #d63384 70%, #ff6b9d 100%);
             min-height: 100vh;
-            background: linear-gradient(145deg, #ffdde1 0%, #ee9ca7 100%);
-            font-family: 'Segoe UI', 'Tajawal', 'Cairo', system-ui, -apple-system, 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
-            direction: rtl;
-            padding: 20px;
         }
 
-        /* الحاوية الرئيسية */
-        .birthday-container {
-            max-width: 750px;
-            width: 100%;
-            background: rgba(255, 248, 245, 0.85);
-            backdrop-filter: blur(5px);
-            border-radius: 70px 70px 80px 80px;
-            box-shadow: 0 30px 40px rgba(0,0,0,0.2), 0 0 0 10px rgba(255,215,0,0.3);
-            text-align: center;
-            padding: 25px 20px 45px;
-            transition: all 0.2s ease;
+        /* Hearts Background - Full Screen */
+        .heart-bg {
+            position: fixed;
+            font-size: 30px;
+            animation: heartFloat linear infinite;
+            z-index: 1;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.3);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(720deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Hearts from sides */
+        .heart-side {
+            position: fixed;
+            font-size: 25px;
+            animation: heartSide linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes heartSide {
+            0% {
+                transform: translateX(-100px) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateX(100vw) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Hearts diagonal */
+        .heart-diag {
+            position: fixed;
+            font-size: 20px;
+            animation: heartDiag linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes heartDiag {
+            0% {
+                transform: translate(-100px, 100vh) rotate(0deg) scale(0.4);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.9;
+            }
+            85% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translate(100vw, -100px) rotate(540deg) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        /* Pulsing hearts in background */
+        .heart-pulse {
+            position: fixed;
+            font-size: 40px;
+            animation: heartPulse ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.2;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.5;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
             z-index: 10;
-            animation: floatIn 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-
-        @keyframes floatIn {
-            0% { opacity: 0; transform: scale(0.85) translateY(40px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        /* الكعكة + الشمع */
-        .cake-section {
-            margin: 20px 0 10px;
-            position: relative;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            padding: 20px;
+            text-align: center;
         }
 
-        .cake {
+        /* Candle */
+        .candle-container {
             position: relative;
-            width: 220px;
-            height: 130px;
-            background: #f7b05e;
-            border-radius: 20px 20px 30px 30px;
-            box-shadow: 0 12px 0 #c97e3a;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: 0.2s;
+            margin-bottom: 30px;
+            animation: bounceIn 1.5s ease-out;
         }
-        .cake:before {
-            content: "🎂";
-            position: absolute;
-            font-size: 70px;
-            top: -45px;
-            left: 50%;
-            transform: translateX(-50%);
-            filter: drop-shadow(2px 8px 8px rgba(0,0,0,0.2));
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        /* شمعتان */
+
         .candle {
+            width: 60px;
+            height: 120px;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 50%, #ff9a9e 100%);
+            border-radius: 10px 10px 5px 5px;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .candle::before {
+            content: '';
             position: absolute;
-            width: 16px;
-            height: 50px;
-            background: #ffe0b5;
-            border-radius: 10px 10px 6px 6px;
-            bottom: 98px;
+            top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 0 0 2px #ffb347;
+            width: 8px;
+            height: 15px;
+            background: #333;
+            border-radius: 2px;
         }
-        .candle.left {
-            margin-left: -28px;
-        }
-        .candle.right {
-            margin-left: 28px;
-        }
+
         .flame {
             position: absolute;
-            width: 16px;
-            height: 26px;
-            background: radial-gradient(circle, #ff8c00, #ffdd55);
-            border-radius: 80% 20% 50% 50%;
-            top: -25px;
-            left: 0px;
-            animation: flicker 0.3s infinite alternate;
-            transform-origin: center bottom;
-            box-shadow: 0 0 12px orange;
-        }
-        @keyframes flicker {
-            0% { transform: scale(1) skewX(2deg); opacity: 0.9;}
-            100% { transform: scale(1.1) skewX(-2deg); opacity: 1; background: #ffaa33;}
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 45px;
+            background: radial-gradient(ellipse at bottom, #ffeb3b 0%, #ff9800 40%, #f44336 70%, transparent 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: flicker 0.1s ease-in-out infinite alternate;
+            box-shadow: 0 0 30px #ff9800, 0 0 60px #ff5722, 0 0 90px rgba(255, 87, 34, 0.5);
         }
 
-        /* بالونات وقلوب متحركة (Canvas) */
-        #animation-canvas {
+        @keyframes flicker {
+            0% {
+                transform: translateX(-50%) scale(1) rotate(-2deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) scale(1.05) rotate(2deg);
+                opacity: 0.9;
+            }
+        }
+
+        /* Cake */
+        .cake {
+            font-size: 100px;
+            margin: 20px 0;
+            animation: cakeAppear 2s ease-out 0.5s both;
+            filter: drop-shadow(0 10px 30px rgba(255, 105, 180, 0.5));
+        }
+
+        @keyframes cakeAppear {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* Title */
+        .title {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 105, 180, 0.5), 0 0 60px rgba(255, 105, 180, 0.3);
+            margin-bottom: 10px;
+            animation: titleGlow 2s ease-in-out infinite alternate, slideIn 1.5s ease-out;
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 40px rgba(255, 105, 180, 0.5), 0 0 60px rgba(255, 105, 180, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(255, 105, 180, 1), 0 0 60px rgba(255, 105, 180, 0.8), 0 0 90px rgba(255, 105, 180, 0.5);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            color: #ffd700;
+            font-weight: 700;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Wishes Card */
+        .wishes-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            border: 2px solid rgba(255, 105, 180, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(255, 105, 180, 0.1);
+            animation: cardAppear 1.5s ease-out 0.8s both;
+            margin-bottom: 30px;
+        }
+
+        @keyframes cardAppear {
+            0% {
+                transform: scale(0.8) rotate(-5deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .wishes-text {
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            color: #fff;
+            line-height: 2.2;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .wishes-text .line {
+            display: block;
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: lineAppear 0.8s ease-out forwards;
+        }
+
+        @keyframes lineAppear {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Sparkle Button */
+        .sparkle-btn {
+            background: linear-gradient(45deg, #ff6b9d, #c44569, #f8b500);
+            background-size: 200% 200%;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            animation: gradientShift 3s ease infinite, pulse 2s ease-in-out infinite;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sparkle-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        .sparkle-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(255, 107, 157, 0.7), 0 0 60px rgba(255, 107, 157, 0.3);
+            }
+        }
+
+        /* Fireworks Canvas */
+        #fireworks {
             position: fixed;
             top: 0;
             left: 0;
@@ -119,307 +379,254 @@
             z-index: 5;
         }
 
-        h1 {
-            font-size: 2.9rem;
-            background: linear-gradient(135deg, #D4145A, #FBB03B);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 10px rgba(255,105,180,0.3);
-            margin: 15px 0 5px;
-        }
-
-        .greeting {
-            font-size: 1.7rem;
-            font-weight: bold;
-            color: #aa2e5a;
-            background: #fff0f3;
-            display: inline-block;
-            padding: 8px 25px;
-            border-radius: 60px;
-            margin: 12px 0;
-            box-shadow: 0 5px 0 #f3a683;
-        }
-
-        .message {
-            font-size: 1.24rem;
-            line-height: 1.6;
-            background: rgba(255,255,240,0.7);
-            padding: 16px;
-            border-radius: 55px;
-            margin: 25px 10px;
-            color: #4a2a2a;
-            font-weight: 500;
-        }
-
-        .emoji-rain {
-            font-size: 2rem;
-            letter-spacing: 12px;
-            margin: 10px;
-            animation: bounceEmoji 1s infinite alternate;
-        }
-
-        @keyframes bounceEmoji {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-12px); }
-        }
-
-        button {
-            background: #ff8a5c;
-            border: none;
-            padding: 12px 28px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: white;
-            border-radius: 50px;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 6px 0 #b1441a;
-        }
-        button:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 #b1441a;
-        }
-
-        footer {
-            margin-top: 32px;
-            font-size: 0.8rem;
-            color: #af5f6e;
-        }
-
-        @media (max-width: 550px) {
-            .birthday-container { padding: 22px 15px 35px; }
-            h1 { font-size: 2.2rem; }
-            .greeting { font-size: 1.3rem; }
-            .message { font-size: 1rem; }
+        /* Responsive */
+        @media (max-width: 480px) {
+            .candle {
+                width: 40px;
+                height: 80px;
+            }
+            .flame {
+                width: 20px;
+                height: 30px;
+                top: -35px;
+            }
+            .cake {
+                font-size: 70px;
+            }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworks"></canvas>
 
-<div class="birthday-container">
-    <div class="cake-section">
-        <div class="cake" id="cakeClick">
-            <div class="candle left"><div class="flame"></div></div>
-            <div class="candle right"><div class="flame"></div></div>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="candle-container">
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
         </div>
+
+        <div class="cake">🎂</div>
+
+        <h1 class="title">عيد ميلاد سعيد!</h1>
+        <p class="subtitle">🎉 كل سنة وانتي طيبة يا حبيبتي 🎉</p>
+
+        <div class="wishes-card">
+            <div class="wishes-text" id="wishesText">
+                <span class="line">في يوم زي ده، ربنا جابك للدنيا وجملها بيكي! 🌟</span>
+                <span class="line">كل سنة وانتي اجمل حاجة حصلتلي في حياتي 💖</span>
+                <span class="line">ربنا يخليكي ليا ويديم فرحتك ويحققلك كل احلامك 🙏</span>
+                <span class="line">انتي نور عيني وسر سعادتي وكل حاجة حلوة في دنيتي ✨</span>
+                <span class="line">عقبال 100 سنة من الفرحة والحب معاكي يا روحي! 💕</span>
+            </div>
+        </div>
+
+        <button class="sparkle-btn" onclick="celebrate()">🎊 اضغطي هنا يا حبيبتي! 🎊</button>
     </div>
-    
-    <h1>🎉 كل سنة وانتِ حبيبتي 🎉</h1>
-    <div class="greeting">🤍 بحبك يا قمر 🤍</div>
-    
-    <div class="message">
-        ✨ يوم ميلاد أجمل إنسانة في الكون ✨<br>
-        عيد ميلاد سعيد يا حبيبة قلبي 💖 <br>
-        كل سنة وانتي النور والضحكة الحلوة 🤗🎂  
-    </div>
 
-    <div class="emoji-rain">
-        🎈 🎁 🎂 🎉 🥳 💝 🎀
-    </div>
+    <script>
+        // Heart emojis array with colors
+        const heartEmojis = ['❤️', '💕', '💖', '💗', '💓', '💝', '💘', '❣️', '💟', '💌', '🩷', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🩶', '🤍'];
+        const heartColors = ['#ff6b9d', '#ff4757', '#ff6348', '#ff9ff3', '#f368e0', '#ff9f43', '#feca57', '#ff6b6b', '#ee5a24', '#f368e0', '#00d2d3', '#5f27cd'];
 
-    <button id="wishBtn">🎁 دوسي هنا عشان كمان تمنيات 🎁</button>
-    <footer>⚡ بحبك مووت — انتِ فرحة عمري ⚡</footer>
-</div>
+        // Create floating hearts from bottom
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-bg';
+            heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+            heart.style.filter = `drop-shadow(0 0 15px ${heartColors[Math.floor(Math.random() * heartColors.length)]})`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 9000);
+        }
 
-<canvas id="animation-canvas"></canvas>
+        // Create hearts from sides
+        function createHeartSide() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-side';
+            heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+            heart.style.filter = `drop-shadow(0 0 10px ${heartColors[Math.floor(Math.random() * heartColors.length)]})`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 11000);
+        }
 
-<script>
-    (function() {
-        // -------------------------------------------------------------
-        //  تأثير قلوب + بالونات + ايموشنات اعياد ميلاد تطلع من تحت لفوق
-        // -------------------------------------------------------------
-        const canvas = document.getElementById('animation-canvas');
+        // Create diagonal hearts
+        function createHeartDiag() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-diag';
+            heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.animationDuration = (Math.random() * 6 + 7) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.filter = `drop-shadow(0 0 12px ${heartColors[Math.floor(Math.random() * heartColors.length)]})`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 13000);
+        }
+
+        // Create pulsing background hearts
+        function createHeartPulse() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-pulse';
+            heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.fontSize = (Math.random() * 50 + 30) + 'px';
+            document.body.appendChild(heart);
+        }
+
+        // Initialize hearts
+        function initHearts() {
+            // Background pulsing hearts
+            for (let i = 0; i < 30; i++) {
+                createHeartPulse();
+            }
+
+            // Continuous floating hearts
+            setInterval(createHeart, 150);
+            setInterval(createHeartSide, 400);
+            setInterval(createHeartDiag, 600);
+
+            // Initial burst
+            for (let i = 0; i < 50; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        }
+
+        // Fireworks Canvas
+        const canvas = document.getElementById('fireworks');
         const ctx = canvas.getContext('2d');
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
         let particles = [];
-        
-        const EMOJIS = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍', '🤎', '💖', '💗', '🎈', '🎉', '🎊', '🎂', '🥳', '🎁', '✨', '🌸', '🌹'];
-        // صور بديلة لاجل البالونات او قلوب .. لكننا سنستخدم emojis بشكل ممتع
-        
-        function resizeCanvas() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        }
-        
-        function createParticle(x, y, customEmoji = null) {
-            const isBalloonOrHeart = true;
-            const emoji = customEmoji || EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
-            const size = 20 + Math.random() * 28;  // حجم مختلف
-            const speedY = 1.2 + Math.random() * 2.5;
-            const speedX = (Math.random() - 0.5) * 0.8;
-            return {
-                x: x,
-                y: y,
-                emoji: emoji,
-                size: size,
-                vy: -speedY,       // يتحرك لأعلى
-                vx: speedX,
-                life: 1,
-                rotation: Math.random() * 360,
-                rotSpeed: (Math.random() - 0.5) * 2
-            };
-        }
-        
-        function addRandomFloaters(quantity = 8, fromLeftRight = false) {
-            for(let i=0; i<quantity; i++) {
-                let x, y;
-                if(fromLeftRight) {
-                    x = Math.random() * width;
-                    y = height + 10 + Math.random() * 50;
-                } else {
-                    x = Math.random() * width;
-                    y = height + (Math.random() * 80);
-                }
-                particles.push(createParticle(x, y));
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 6 + 2;
+                this.vx = Math.cos(angle) * velocity;
+                this.vy = Math.sin(angle) * velocity;
+                this.life = 100;
+                this.decay = Math.random() * 2 + 1;
+                this.size = Math.random() * 4 + 2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += 0.1;
+                this.life -= this.decay;
+                this.size *= 0.98;
+            }
+
+            draw() {
+                ctx.globalAlpha = this.life / 100;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1;
             }
         }
-        
-        // طلوع مستمر للقلوب والبالونات
-        let frameCount = 0;
-        function animateParticles() {
-            ctx.clearRect(0, 0, width, height);
-            
-            // كل 12 إطار نضيف عناصر جديدة من الاسفل
-            if(frameCount % 14 === 0) {
-                addRandomFloaters(3, true);
+
+        function createFirework(x, y) {
+            const colors = ['#ff6b9d', '#ffd700', '#ff4757', '#2ed573', '#1e90ff', '#ff6348', '#da70d6', '#fff', '#ff1493', '#ff9ff3'];
+            for (let i = 0; i < 60; i++) {
+                particles.push(new Particle(x, y, colors[Math.floor(Math.random() * colors.length)]));
             }
-            if(frameCount % 25 === 0){
-                addRandomFloaters(2, true);
-            }
-            
-            for(let i=0; i<particles.length; i++) {
-                const p = particles[i];
-                p.x += p.vx;
-                p.y += p.vy;
-                p.rotation += p.rotSpeed;
-                
-                // محو لما يخرج من الشاشة تمامًا من فوق
-                if(p.y + p.size < -50 || p.x + p.size < -50 || p.x - p.size > width+100) {
-                    particles.splice(i,1);
-                    i--;
-                    continue;
-                }
-                
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate(p.rotation * Math.PI/180);
-                ctx.font = `${p.size}px "Segoe UI Emoji", "Apple Color Emoji", system-ui, sans-serif`;
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle";
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = "rgba(0,0,0,0.2)";
-                ctx.fillText(p.emoji, 0, 0);
-                ctx.restore();
-            }
-            
-            frameCount++;
-            requestAnimationFrame(animateParticles);
         }
-        
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-        });
-        
-        resizeCanvas();
-        
-        // نضيف دفعة اولية من القلوب والبالونات
-        for(let i=0;i<25;i++) {
-            let x = Math.random() * width;
-            let y = height - Math.random() * height*0.5;
-            particles.push(createParticle(x, y + 200, EMOJIS[Math.floor(Math.random()*EMOJIS.length)]));
-        }
-        
-        animateParticles();
-        
-        // عند الضغط على الزر أو الكعكة تظهر موجة من الإيموشنات والقلوب
-        function burstOfJoy(centerX, centerY) {
-            for(let i=0; i<36; i++) {
-                let angle = Math.random() * Math.PI * 2;
-                let radius = Math.random() * 90;
-                let xOff = Math.cos(angle) * radius;
-                let yOff = Math.sin(angle) * radius;
-                let emojiChoice = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
-                let particle = createParticle(centerX + xOff, centerY + yOff, emojiChoice);
-                particle.vy = -1.5 - Math.random() * 3;
-                particle.vx = (Math.random() - 0.5) * 2.2;
-                particles.push(particle);
-            }
-            // دفعة كمان
-            setTimeout(() => {
-                for(let i=0;i<20;i++){
-                    let em = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
-                    let p2 = createParticle(centerX + (Math.random()-0.5)*70, centerY + (Math.random()-0.5)*50, em);
-                    p2.vy = -2;
-                    particles.push(p2);
-                }
-            }, 60);
-        }
-        
-        // ربط الزر
-        const wishBtn = document.getElementById('wishBtn');
-        const cakeDiv = document.getElementById('cakeClick');
-        
-        function triggerHappyExplosion(e) {
-            let clientX, clientY;
-            if(e && e.touches) {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-            } else if(e && (e.clientX || e.clientY === 0)) {
-                clientX = e.clientX;
-                clientY = e.clientY;
-            } else {
-                clientX = width/2;
-                clientY = height/2;
-            }
-            burstOfJoy(clientX, clientY);
-            // تغيير رسالة عابرة او اضافة something
-            const msgDiv = document.querySelector('.message');
-            msgDiv.style.transform = 'scale(1.02)';
-            setTimeout(()=> msgDiv.style.transform = '', 300);
-        }
-        
-        wishBtn.addEventListener('click', (e) => {
-            triggerHappyExplosion(e);
-            // كمان نغير كلمة مؤقتة لفرحة
-            const greetDiv = document.querySelector('.greeting');
-            const originalText = greetDiv.innerHTML;
-            greetDiv.innerHTML = '🎈 يااا سعيدة يا جميلة 🎈';
-            setTimeout(() => {
-                greetDiv.innerHTML = originalText;
-            }, 1800);
-        });
-        
-        cakeDiv.addEventListener('click', (e) => {
-            triggerHappyExplosion(e);
-            // زيادة وميض الشمع بالأنيميشن
-            const flames = document.querySelectorAll('.flame');
-            flames.forEach(fl => {
-                fl.style.animation = 'flicker 0.1s infinite';
-                setTimeout(()=> fl.style.animation = 'flicker 0.3s infinite alternate', 400);
+
+        function animateFireworks() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles = particles.filter(p => p.life > 0);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
             });
-        });
-        
-        // تأكد من ان الكيك يظهر للموبايل
-        document.body.addEventListener('touchstart', (e) => {
-            if(e.target === wishBtn || e.target === cakeDiv || cakeDiv.contains(e.target)) return;
-            // ضغط عشوائي على الخلفية? لا داعي
-        });
-        
-        // انيميشن مستمر لعنوان + هدايا
+
+            requestAnimationFrame(animateFireworks);
+        }
+
+        animateFireworks();
+
+        // Auto fireworks
         setInterval(() => {
-            const emojiSpan = document.querySelector('.emoji-rain');
-            if(emojiSpan) {
-                emojiSpan.style.transform = 'scale(1.05)';
-                setTimeout(()=> emojiSpan.style.transform = '', 400);
+            createFirework(Math.random() * canvas.width, Math.random() * canvas.height * 0.5);
+        }, 2500);
+
+        // Celebrate function
+        function celebrate() {
+            // Massive heart explosion
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    createHeart();
+                    if (i % 3 === 0) createHeartSide();
+                    if (i % 5 === 0) createHeartDiag();
+                }, i * 20);
             }
-        }, 3000);
-    })();
-</script>
+
+            // Fireworks burst
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    createFirework(
+                        Math.random() * canvas.width * 0.8 + canvas.width * 0.1,
+                        Math.random() * canvas.height * 0.4 + canvas.height * 0.1
+                    );
+                }, i * 150);
+            }
+
+            // Show love message
+            const btn = document.querySelector('.sparkle-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '💖 بحبك اوي يا حبيبتي! 💖';
+            btn.style.background = 'linear-gradient(45deg, #ff1493, #ff6b9d, #ff1493)';
+            btn.style.transform = 'scale(1.1)';
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+                btn.style.transform = '';
+            }, 3000);
+        }
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Click anywhere for fireworks and hearts
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON') {
+                createFirework(e.clientX, e.clientY);
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(createHeart, i * 50);
+                }
+            }
+        });
+
+        // Animate wishes lines
+        const lines = document.querySelectorAll('.wishes-text .line');
+        lines.forEach((line, index) => {
+            line.style.animationDelay = (2 + index * 0.6) + 's';
+        });
+
+        // Start everything
+        initHearts();
+    </script>
 </body>
 </html>
