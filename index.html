@@ -1,134 +1,425 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عيد ميلاد سعيد حبيبتي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>عيد ميلاد حبيبتي 🎂</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Cairo', sans-serif;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #ffdde1 0%, #ee9ca7 100%);
+            font-family: 'Segoe UI', 'Tajawal', 'Cairo', system-ui, -apple-system, 'Poppins', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            direction: rtl;
+            padding: 20px;
         }
 
-        /* كارت المعايدة في المنتصف */
-        .greeting-card {
-            background: rgba(255, 255, 255, 0.85);
-            padding: 40px 60px;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        /* الحاوية الرئيسية */
+        .birthday-container {
+            max-width: 750px;
+            width: 100%;
+            background: rgba(255, 248, 245, 0.85);
+            backdrop-filter: blur(5px);
+            border-radius: 70px 70px 80px 80px;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.2), 0 0 0 10px rgba(255,215,0,0.3);
             text-align: center;
+            padding: 25px 20px 45px;
+            transition: all 0.2s ease;
             z-index: 10;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            animation: popIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-            opacity: 0;
-            transform: scale(0.8);
+            animation: floatIn 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes floatIn {
+            0% { opacity: 0; transform: scale(0.85) translateY(40px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* الكعكة + الشمع */
+        .cake-section {
+            margin: 20px 0 10px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cake {
+            position: relative;
+            width: 220px;
+            height: 130px;
+            background: #f7b05e;
+            border-radius: 20px 20px 30px 30px;
+            box-shadow: 0 12px 0 #c97e3a;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .cake:before {
+            content: "🎂";
+            position: absolute;
+            font-size: 70px;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: drop-shadow(2px 8px 8px rgba(0,0,0,0.2));
+        }
+        /* شمعتان */
+        .candle {
+            position: absolute;
+            width: 16px;
+            height: 50px;
+            background: #ffe0b5;
+            border-radius: 10px 10px 6px 6px;
+            bottom: 98px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 2px #ffb347;
+        }
+        .candle.left {
+            margin-left: -28px;
+        }
+        .candle.right {
+            margin-left: 28px;
+        }
+        .flame {
+            position: absolute;
+            width: 16px;
+            height: 26px;
+            background: radial-gradient(circle, #ff8c00, #ffdd55);
+            border-radius: 80% 20% 50% 50%;
+            top: -25px;
+            left: 0px;
+            animation: flicker 0.3s infinite alternate;
+            transform-origin: center bottom;
+            box-shadow: 0 0 12px orange;
+        }
+        @keyframes flicker {
+            0% { transform: scale(1) skewX(2deg); opacity: 0.9;}
+            100% { transform: scale(1.1) skewX(-2deg); opacity: 1; background: #ffaa33;}
+        }
+
+        /* بالونات وقلوب متحركة (Canvas) */
+        #animation-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
         }
 
         h1 {
-            color: #ff4b72;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+            font-size: 2.9rem;
+            background: linear-gradient(135deg, #D4145A, #FBB03B);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(255,105,180,0.3);
+            margin: 15px 0 5px;
         }
 
-        p {
-            color: #555;
-            font-size: 1.5rem;
+        .greeting {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: #aa2e5a;
+            background: #fff0f3;
+            display: inline-block;
+            padding: 8px 25px;
+            border-radius: 60px;
+            margin: 12px 0;
+            box-shadow: 0 5px 0 #f3a683;
+        }
+
+        .message {
+            font-size: 1.24rem;
             line-height: 1.6;
+            background: rgba(255,255,240,0.7);
+            padding: 16px;
+            border-radius: 55px;
+            margin: 25px 10px;
+            color: #4a2a2a;
+            font-weight: 500;
         }
 
-        .candles {
-            font-size: 3rem;
+        .emoji-rain {
+            font-size: 2rem;
+            letter-spacing: 12px;
+            margin: 10px;
+            animation: bounceEmoji 1s infinite alternate;
+        }
+
+        @keyframes bounceEmoji {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-12px); }
+        }
+
+        button {
+            background: #ff8a5c;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 50px;
             margin-top: 20px;
-            animation: pulse 2s infinite;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 0 #b1441a;
+        }
+        button:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #b1441a;
         }
 
-        /* الأنيميشن الخاص بالكارت */
-        @keyframes popIn {
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+        footer {
+            margin-top: 32px;
+            font-size: 0.8rem;
+            color: #af5f6e;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        /* العناصر اللي بتطير من تحت لفوق */
-        .floating-item {
-            position: absolute;
-            bottom: -10vh;
-            font-size: 2.5rem;
-            animation: floatUp linear forwards;
-            z-index: 1;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg) scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-120vh) rotate(360deg) scale(1.2);
-                opacity: 0;
-            }
+        @media (max-width: 550px) {
+            .birthday-container { padding: 22px 15px 35px; }
+            h1 { font-size: 2.2rem; }
+            .greeting { font-size: 1.3rem; }
+            .message { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="greeting-card">
-        <h1>كل سنة وأنتي أجمل حاجة في حياتي ❤️</h1>
-        <p>كل سنة وأنتي طيبة يا حبيبتي،<br>ويارب دايماً ماليّة عليا دنيتي فرحة وسعادة.<br>بحبك جداً ✨</p>
-        <div class="candles">🎂🕯️🎈</div>
+<div class="birthday-container">
+    <div class="cake-section">
+        <div class="cake" id="cakeClick">
+            <div class="candle left"><div class="flame"></div></div>
+            <div class="candle right"><div class="flame"></div></div>
+        </div>
+    </div>
+    
+    <h1>🎉 كل سنة وانتِ حبيبتي 🎉</h1>
+    <div class="greeting">🤍 بحبك يا قمر 🤍</div>
+    
+    <div class="message">
+        ✨ يوم ميلاد أجمل إنسانة في الكون ✨<br>
+        عيد ميلاد سعيد يا حبيبة قلبي 💖 <br>
+        كل سنة وانتي النور والضحكة الحلوة 🤗🎂  
     </div>
 
-    <script>
-        // الأشكال اللي هتطير في الخلفية (قلوب، بلالين، شمع، هدايا)
-        const floatingItems = ['❤️', '💖', '🎈', '🎉', '🎁', '✨', '💕', '🎂', '🥳'];
+    <div class="emoji-rain">
+        🎈 🎁 🎂 🎉 🥳 💝 🎀
+    </div>
 
-        function createFloatingItem() {
-            const item = document.createElement('div');
-            item.classList.add('floating-item');
-            
-            // اختيار شكل عشوائي
-            item.innerText = floatingItems[Math.floor(Math.random() * floatingItems.length)];
-            
-            // تحديد مكان عشوائي بالعرض
-            item.style.left = Math.random() * 100 + 'vw';
-            
-            // تحديد سرعة عشوائية (من 4 إلى 8 ثواني عشان تطلع لفوق)
-            const duration = Math.random() * 4 + 4;
-            item.style.animationDuration = duration + 's';
-            
-            // تحديد حجم عشوائي
-            item.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+    <button id="wishBtn">🎁 دوسي هنا عشان كمان تمنيات 🎁</button>
+    <footer>⚡ بحبك مووت — انتِ فرحة عمري ⚡</footer>
+</div>
 
-            document.body.appendChild(item);
+<canvas id="animation-canvas"></canvas>
 
-            // مسح العنصر بعد ما يخلص الأنيميشن عشان مياكلش من رامات المتصفح
-            setTimeout(() => {
-                item.remove();
-            }, duration * 1000);
+<script>
+    (function() {
+        // -------------------------------------------------------------
+        //  تأثير قلوب + بالونات + ايموشنات اعياد ميلاد تطلع من تحت لفوق
+        // -------------------------------------------------------------
+        const canvas = document.getElementById('animation-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        
+        let particles = [];
+        
+        const EMOJIS = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍', '🤎', '💖', '💗', '🎈', '🎉', '🎊', '🎂', '🥳', '🎁', '✨', '🌸', '🌹'];
+        // صور بديلة لاجل البالونات او قلوب .. لكننا سنستخدم emojis بشكل ممتع
+        
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
         }
-
-        // إنشاء عنصر جديد كل 300 جزء من الثانية
-        setInterval(createFloatingItem, 300);
-    </script>
-
+        
+        function createParticle(x, y, customEmoji = null) {
+            const isBalloonOrHeart = true;
+            const emoji = customEmoji || EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+            const size = 20 + Math.random() * 28;  // حجم مختلف
+            const speedY = 1.2 + Math.random() * 2.5;
+            const speedX = (Math.random() - 0.5) * 0.8;
+            return {
+                x: x,
+                y: y,
+                emoji: emoji,
+                size: size,
+                vy: -speedY,       // يتحرك لأعلى
+                vx: speedX,
+                life: 1,
+                rotation: Math.random() * 360,
+                rotSpeed: (Math.random() - 0.5) * 2
+            };
+        }
+        
+        function addRandomFloaters(quantity = 8, fromLeftRight = false) {
+            for(let i=0; i<quantity; i++) {
+                let x, y;
+                if(fromLeftRight) {
+                    x = Math.random() * width;
+                    y = height + 10 + Math.random() * 50;
+                } else {
+                    x = Math.random() * width;
+                    y = height + (Math.random() * 80);
+                }
+                particles.push(createParticle(x, y));
+            }
+        }
+        
+        // طلوع مستمر للقلوب والبالونات
+        let frameCount = 0;
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // كل 12 إطار نضيف عناصر جديدة من الاسفل
+            if(frameCount % 14 === 0) {
+                addRandomFloaters(3, true);
+            }
+            if(frameCount % 25 === 0){
+                addRandomFloaters(2, true);
+            }
+            
+            for(let i=0; i<particles.length; i++) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rotation += p.rotSpeed;
+                
+                // محو لما يخرج من الشاشة تمامًا من فوق
+                if(p.y + p.size < -50 || p.x + p.size < -50 || p.x - p.size > width+100) {
+                    particles.splice(i,1);
+                    i--;
+                    continue;
+                }
+                
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI/180);
+                ctx.font = `${p.size}px "Segoe UI Emoji", "Apple Color Emoji", system-ui, sans-serif`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = "rgba(0,0,0,0.2)";
+                ctx.fillText(p.emoji, 0, 0);
+                ctx.restore();
+            }
+            
+            frameCount++;
+            requestAnimationFrame(animateParticles);
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+        });
+        
+        resizeCanvas();
+        
+        // نضيف دفعة اولية من القلوب والبالونات
+        for(let i=0;i<25;i++) {
+            let x = Math.random() * width;
+            let y = height - Math.random() * height*0.5;
+            particles.push(createParticle(x, y + 200, EMOJIS[Math.floor(Math.random()*EMOJIS.length)]));
+        }
+        
+        animateParticles();
+        
+        // عند الضغط على الزر أو الكعكة تظهر موجة من الإيموشنات والقلوب
+        function burstOfJoy(centerX, centerY) {
+            for(let i=0; i<36; i++) {
+                let angle = Math.random() * Math.PI * 2;
+                let radius = Math.random() * 90;
+                let xOff = Math.cos(angle) * radius;
+                let yOff = Math.sin(angle) * radius;
+                let emojiChoice = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+                let particle = createParticle(centerX + xOff, centerY + yOff, emojiChoice);
+                particle.vy = -1.5 - Math.random() * 3;
+                particle.vx = (Math.random() - 0.5) * 2.2;
+                particles.push(particle);
+            }
+            // دفعة كمان
+            setTimeout(() => {
+                for(let i=0;i<20;i++){
+                    let em = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+                    let p2 = createParticle(centerX + (Math.random()-0.5)*70, centerY + (Math.random()-0.5)*50, em);
+                    p2.vy = -2;
+                    particles.push(p2);
+                }
+            }, 60);
+        }
+        
+        // ربط الزر
+        const wishBtn = document.getElementById('wishBtn');
+        const cakeDiv = document.getElementById('cakeClick');
+        
+        function triggerHappyExplosion(e) {
+            let clientX, clientY;
+            if(e && e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else if(e && (e.clientX || e.clientY === 0)) {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            } else {
+                clientX = width/2;
+                clientY = height/2;
+            }
+            burstOfJoy(clientX, clientY);
+            // تغيير رسالة عابرة او اضافة something
+            const msgDiv = document.querySelector('.message');
+            msgDiv.style.transform = 'scale(1.02)';
+            setTimeout(()=> msgDiv.style.transform = '', 300);
+        }
+        
+        wishBtn.addEventListener('click', (e) => {
+            triggerHappyExplosion(e);
+            // كمان نغير كلمة مؤقتة لفرحة
+            const greetDiv = document.querySelector('.greeting');
+            const originalText = greetDiv.innerHTML;
+            greetDiv.innerHTML = '🎈 يااا سعيدة يا جميلة 🎈';
+            setTimeout(() => {
+                greetDiv.innerHTML = originalText;
+            }, 1800);
+        });
+        
+        cakeDiv.addEventListener('click', (e) => {
+            triggerHappyExplosion(e);
+            // زيادة وميض الشمع بالأنيميشن
+            const flames = document.querySelectorAll('.flame');
+            flames.forEach(fl => {
+                fl.style.animation = 'flicker 0.1s infinite';
+                setTimeout(()=> fl.style.animation = 'flicker 0.3s infinite alternate', 400);
+            });
+        });
+        
+        // تأكد من ان الكيك يظهر للموبايل
+        document.body.addEventListener('touchstart', (e) => {
+            if(e.target === wishBtn || e.target === cakeDiv || cakeDiv.contains(e.target)) return;
+            // ضغط عشوائي على الخلفية? لا داعي
+        });
+        
+        // انيميشن مستمر لعنوان + هدايا
+        setInterval(() => {
+            const emojiSpan = document.querySelector('.emoji-rain');
+            if(emojiSpan) {
+                emojiSpan.style.transform = 'scale(1.05)';
+                setTimeout(()=> emojiSpan.style.transform = '', 400);
+            }
+        }, 3000);
+    })();
+</script>
 </body>
 </html>
