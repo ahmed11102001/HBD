@@ -1,15 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "nada_birthday.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/nada_birthday.html"
-    }
+  "rewrites": [
+    { "source": "/", "destination": "/nada_birthday.html" }
   ]
 }
